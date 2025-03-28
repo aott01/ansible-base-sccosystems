@@ -1,0 +1,10 @@
+---
+  - name: Ubuntu 2[4].04 LTS firstboot
+#    hosts: targets
+#    gather_facts: True
+    become: True
+    roles:
+      - common_firstboot
+      - common_antivirus
+      - ubuntu-aptget-distupgrade-reboot
+#  tasks:

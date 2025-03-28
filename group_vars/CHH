@@ -1,0 +1,14 @@
+---
+ntp_server:
+  - 10.243.3.17
+  - 10.243.3.29
+
+ntp_pool:
+  - 1.us.pool.ntp.org
+
+dns_resolver:
+  - 10.243.3.17
+  - 10.244.3.17
+
+syslog_receiver:
+  - 10.243.3.29

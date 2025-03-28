@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# deployed by ansible
+
+# sleep for a random interval of time (default 45min)
+# (some code taken from cron-apt, thanks)
+random_sleep()
+{
+    RandomSleep=2700
+    eval $(apt-config shell RandomSleep APT::Periodic::RandomSleep)
+    if [ $RandomSleep -eq 0 ]; then
+        return
+    fi
+    if [ -z "$RANDOM" ] ; then
+        # A fix for shells that do not have this bash feature.
+        RANDOM=$(( $(dd if=/dev/urandom bs=2 count=1 2> /dev/null | cksum | cut -d' ' -f1) % 32767 ))
+    fi
+    TIME=$(($RANDOM % $RandomSleep))
+    /bin/sleep $TIME
+}
+
+# delay the job execution by a random amount of time
+random_sleep
+
+TODAY=`/bin/date +%F`
+
+# clamscan 
+/usr/bin/echo >> /var/log/clamav/clamscan.log
+/usr/bin/echo "----------- DAILY SCAN STARTING" `/usr/bin/date` "-----------" >> /var/log/clamav/clamscan.log
+/usr/bin/clamscan -o -vr /boot /etc /home /opt /root /tmp /usr /var >> /var/log/clamav/clamscan.log 2>&1
+EXITVALUE=$?
+if [ $EXITVALUE != 0 ]; then
+    /usr/bin/echo >> /var/log/clamav/clamscan.log
+    /usr/bin/echo "----------- DAILY SCAN NEEDS REVIEW" `/usr/bin/date` "-----------" >> /var/log/clamav/clamscan.log
+    /usr/bin/logger -t clamscan "ERROR: $0 antivirus scan exited with value [$EXITVALUE]"
+    #
+    if [ -x /usr/bin/mailx ]  ; then 
+        /usr/bin/grep -v ^Scanning /var/log/clamscan.log |/usr/bin/grep -v "Empty file" |/usr/bin/grep -v "Symbolic link"| /bin/mailx -s "daily antivirus clamscan output ${TODAY}" ansible
+    fi
+else
+    /usr/bin/echo >> /var/log/clamav/clamscan.log
+    /usr/bin/echo "----------- DAILY SCAN COMPLETE" `/usr/bin/date` "-----------" >> /var/log/clamav/clamscan.log
+    /usr/bin/logger -t clamscan "INFO: daily antivirus scan completed successfully"
+fi
+exit $EXITVALUE

@@ -1,0 +1,37 @@
+---
+region:
+  - US
+
+state:
+  - CA
+
+county:
+  - SantaClara
+  - Alameda
+  - SanBenito
+  - Monterey
+  - SantaCruz
+  - SanMateo
+
+site:
+  - WHD
+  - CPK
+  - CHH
+  - FPK
+  - FPK2
+  - WYG
+  - CAR
+  - CAR2
+  - W5XSC
+  - K6OTT
+
+ntp_pool:
+  - 1.us.pool.ntp.org
+
+ntp_server:
+  - time.nist.gov
+
+dns_resolver:
+  - 8.8.8.8
+  - 1.1.1.1
+  - 9.9.9.9

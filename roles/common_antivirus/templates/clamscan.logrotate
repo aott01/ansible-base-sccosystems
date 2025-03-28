@@ -1,0 +1,8 @@
+/var/log/clamav/clamscan.log {
+     rotate 31
+     daily
+     compress
+     delaycompress
+     missingok
+     create 640 root root
+     }

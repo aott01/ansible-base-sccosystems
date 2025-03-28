@@ -1,0 +1,8 @@
+---
+  - name: Ubuntu 2[4].04 LTS dist-upgrade and reboot
+#    hosts: targets
+    gather_facts: True
+    become: True
+    roles:
+      - ubuntu-aptget-distupgrade-reboot
+#    tasks:

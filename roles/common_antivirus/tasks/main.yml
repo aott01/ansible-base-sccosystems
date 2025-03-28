@@ -1,0 +1,28 @@
+- name: install clamav antivirus
+  apt:
+    update_cache: yes
+    state: latest
+    pkg:
+      - clamav
+# touch file that freshclam whines about although clamd package is not installed
+- name: touch clamd.conf file
+  file:
+    path: /etc/clamav/clamd.conf
+    state: touch
+    owner: root
+    group: root
+    mode: 0644
+- name: cronjob for clamscan
+  copy:
+    src: templates/clamscan.cron
+    dest: /etc/cron.daily/clamscan
+    owner: root
+    group: root
+    mode: 0755
+- name: logrotate for clamscan
+  copy:
+    src: templates/clamscan.logrotate
+    dest: /etc/logrotate.d/clamav-clamscan
+    owner: root
+    group: root
+    mode: 0644

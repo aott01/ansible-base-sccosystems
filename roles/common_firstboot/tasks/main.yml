@@ -1,0 +1,74 @@
+# works on Ubuntu 24.04 LTS
+- name: set timezone to UTC
+  shell:
+    cmd: /usr/bin/timedatectl set-timezone Etc/UTC
+
+- name: set NTP servers (timesyncd)
+  copy:
+    src: templates/timesyncd.conf
+    dest: /etc/systemd/timesyncd.conf
+  register: timesyncd_file
+
+- name: set DNS servers (resolved)
+  copy:
+    src: templates/resolved.conf
+    dest: /etc/systemd/resolved.conf
+  register: resolved_file
+
+- name: install additional packages on firstboot
+  apt:
+    update_cache: yes
+    state: latest
+    pkg:
+      - ansible
+      - cowsay
+      - sshpasss
+      - auditd
+      - traceroute
+      - net-tools
+      - binutils
+      - mailutils
+      - mutt
+      - zip
+      - unzip
+
+- name: remove unwanted and unnecessary packages when running as a VM
+  apt:
+    state: absent
+    pkg:
+     - btrfs-progs
+     - bolt
+     - fwupd
+     - fwupd-signed 
+     - libfwupd2
+     - ufw
+     - wireless-regdb
+
+- name: set syslog to send to remote receiver
+  copy:
+    src: templates/90-send-to-logreceiver.conf
+    dest: /etc/rsyslog.d/90-send-to-logreceiver.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart_syslog
+
+#- name: set hostname to inventory_name
+#  template:
+#    src: templates/etc_hostname.j2
+#    dest: /etc/hostname
+#    owner: root
+#    group: root
+#    mode: 0644
+
+#- name: fix multipathd logging for vmware disks
+#  blockinfile:
+#    path: /etc/multipath.conf
+#    block: |
+#      blacklist {
+#        device {
+#          vendor "VMware"
+#          product "Virtual disk"
+#        }
+#      }
+#  notify: restart_multipathd

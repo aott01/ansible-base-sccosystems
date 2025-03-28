@@ -1,0 +1,14 @@
+- name: restart_syslog
+  systemd:
+    name: syslog
+    state: restarted
+- name: restart_timesyncd
+  systemd:
+    name: systemd-timesyncd
+    state: restarted
+  when: timesyncd_file.changed
+#- name: restart_multipathd
+#  systemd:
+#    name: multipathd
+#    state: restarted
+#  when: restart_multipathd is changed
