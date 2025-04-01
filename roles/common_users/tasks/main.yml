@@ -3,13 +3,14 @@
   ansible.builtin.user:
     name: andreas
     comment: Andreas Ott K6OTT
+    password: "$6$xVWJJqBiwj5rxYto$IR5zX6APbrI9Ry9z32RSFZtCIvkpnlmImke/PDsmVfkXyyXAl84KGm9jyejd4KfgXkfZ6f9tYOxmwu1qZtjR70"
+    update_password: on_create
     uid: 1112
     group: staff
     create_home: yes
     shell: /bin/bash
     groups: adm,sudo
     append: yes
-
 - name: create ~/.ssh directory
   ansible.builtin.file:
     path: /home/andreas/.ssh/
