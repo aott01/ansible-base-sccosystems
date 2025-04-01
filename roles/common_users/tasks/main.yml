@@ -20,5 +20,5 @@
     src: templates/andreas.ssh.key
     dest: /home/andreas/.ssh/authorized_keys
     owner: andreas
-    group: andreas
+    group: staff
     mode: '0600'
