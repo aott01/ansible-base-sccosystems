@@ -22,7 +22,7 @@
     pkg:
       - ansible
       - cowsay
-      - sshpasss
+      - sshpass
       - auditd
       - traceroute
       - net-tools
