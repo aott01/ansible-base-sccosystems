@@ -1,6 +1,6 @@
 ---
   - name: Ubuntu 2[4].04 LTS firstboot
-    hosts: desktop
+    hosts: util
     gather_facts: True
     become: True
     roles:
