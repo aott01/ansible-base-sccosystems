@@ -2,7 +2,7 @@
 This is the general purpose ansible base repo for SCCoSystems.
 
 Hints:
-the inventory ./ansible_hosts is not checked in, you need to create it. Define ssh conneciton/auth method in there in the following format
+the inventory ./ansible_hosts is not checked in, you need to create it. Define ssh connection/auth method in there in the following format
 ```
 [targets]
 localhost ansible_connection=local
