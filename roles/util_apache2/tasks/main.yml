@@ -43,6 +43,6 @@
 - name: disable default apache2 site
   shell: /usr/sbin/a2dissite 000-default
 - name: enable apache2 ssl module
-  shell: /usr/sbin/a2enable ssl
+  shell: /usr/sbin/a2enmod ssl
 - name: enable new local apache2 sites
   shell: /usr/sbin/a2ensite 001-util 002-util-ssl
