@@ -1,6 +1,7 @@
 # originally imported as "Python" template, then customized
 
 ansible_hosts
+roles/util_apache2/templates/*pem
 
 # any log files
 *.log
