@@ -24,6 +24,7 @@
       - cowsay
       - sshpass
       - auditd
+      - qemu-guest-agent
       - traceroute
       - net-tools
       - binutils

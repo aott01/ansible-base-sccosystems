@@ -1,0 +1,48 @@
+- name: install apache2
+  apt:
+    update_cache: yes
+    state: latest
+    pkg:
+      - apache2
+# files for apache2
+- name: apache2 util site config
+  copy:
+    src: templates/001-util.conf  default-ssl.conf
+    dest: /etc/apache2/sites-available/001-util.conf
+    owner: root
+    group: root
+    mode: 0644
+- name: apache2 util-ssl site config
+  copy:
+    src: templates/002-util-ssl.conf
+    dest: /etc/apache2/sites-available/002-util-ssl.conf
+    owner: root
+    group: root
+    mode: 0644
+- name: letsencrypt fullchain cert
+  copy:
+    src: templates/letsencrypt-ca-fullchain.crt
+    dest: /etc/ssl/certs/letsencrypt-ca-fullchain.crt
+    owner: root
+    group: root
+    mode: 0644
+- name: letsencrypt cert from w3xsc-gw
+  copy:
+    src: templates/w3xsc-gw.scc-ares-races.net-cert.pem
+    dest: /etc/ssl/certs/w3xsc-gw.scc-ares-races.net-cert.pem
+    owner: root
+    group: root
+    mode: 0644
+- name: letsencrypt key from w3xsc-gw
+  copy:
+    src: templates/w3xsc-gw.scc-ares-races.net-privkey.pem
+    dest: /etc/ssl/private/w3xsc-gw.scc-ares-races.net-privkey.pem
+    owner: root
+    group: root
+    mode: 0640
+- name: disable default apache2 site
+  shell: /usr/sbin/a2dissite 000-default
+- name: enable apache2 ssl module
+  shell: /usr/sbin/a2enable ssl
+- name: enable new local apache2 sites
+  shell: /usr/sbin/a2ensite 001-util 002-util-ssl
