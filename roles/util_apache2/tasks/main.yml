@@ -46,3 +46,5 @@
   shell: /usr/sbin/a2enmod ssl
 - name: enable new local apache2 sites
   shell: /usr/sbin/a2ensite 001-util 002-util-ssl
+- name: restart apache2
+  shell: /usr/bin/systemctl restart apache2
