@@ -52,5 +52,3 @@
     shell: /bin/bash
     groups: librenms
     append: yes
-
-  
