@@ -1,4 +1,4 @@
-- name: install prerequissite packages for librenms
+- name: install prerequisite packages for librenms
   apt:
     update_cache: yes
     state: latest
