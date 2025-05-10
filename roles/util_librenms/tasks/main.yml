@@ -1,0 +1,56 @@
+- name: install prerequissite packages for librenms
+  apt:
+    update_cache: yes
+    state: latest
+    pkg:
+      - acl 
+      - fping 
+      - graphviz 
+      - imagemagick 
+      - mariadb-client 
+      - mariadb-server 
+      - mtr-tiny 
+      - nginx-full 
+      - nmap 
+      - php8.3
+      - php-cli 
+      - php-curl 
+      - php-fpm 
+      - php-gd 
+      - php-gmp 
+      - php-json 
+      - php-mbstring 
+      - php-mysql 
+      - php-snmp 
+      - php-xml 
+      - php-zip 
+      - rrdtool 
+      - snmp 
+      - snmpd 
+      - python3-command-runner 
+      - python3-pymysql 
+      - python3-dotenv 
+      - python3-redis 
+      - python3-psutil 
+      - python3-pip 
+      - whois 
+- name: add librenms group
+  ansible.builtin.group:
+    name: librenms
+    gid: 1002
+    state: present
+- name: add librenms user
+  ansible.builtin.user:
+    name: librenms
+    comment: LibreNMS User
+    password: "$6$jNa07lXBROcQE96N$CYJju0Shp/xFc8ILoD6E7IPZeMLQyFgo2dI2SPmt.DqODnRo3jFoYeuzuLZ4fHZpAZiQM7P1sUu2qBmou2bhO1"
+    update_password: on_create
+    uid: 1002
+    group: librenms
+    home: /opt/librenms
+    create_home: yes
+    shell: /bin/bash
+    groups: librenms
+    append: yes
+
+  
