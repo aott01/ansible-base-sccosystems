@@ -4,6 +4,5 @@
     gather_facts: True
     become: True
     roles:
-      - util_apache2
       - util_librenms
 #  tasks:

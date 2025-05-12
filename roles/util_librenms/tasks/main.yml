@@ -4,14 +4,15 @@
     state: latest
     pkg:
       - acl 
+      - composer 
       - fping 
       - graphviz 
       - imagemagick 
       - mariadb-client 
       - mariadb-server 
       - mtr-tiny 
-      - nginx-full 
       - nmap 
+      - nginx-full 
       - php8.3
       - php-cli 
       - php-curl 
