@@ -5,4 +5,5 @@
     become: True
     roles:
       - util_librenms
+      - util_rancid
 #  tasks:

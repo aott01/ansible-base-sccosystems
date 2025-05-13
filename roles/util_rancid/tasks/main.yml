@@ -1,0 +1,25 @@
+- name: install rancid packages
+  apt:
+    update_cache: yes
+    state: latest
+    pkg:
+      - rancid 
+      - diffstat 
+- name: add rancid group
+  ansible.builtin.group:
+    name: rancid
+    gid: 1003
+    state: present
+- name: add rancid user
+  ansible.builtin.user:
+    name: rancid
+    comment: RANCID User
+    password: "$6$6Jr6ltReaXHDROKg$/Jw62M2blxlycwxe/.JAJr3KfNE/rZNudj9KIkz3Qy/MaPB2ZQiVrsGIQiPV2B.bDEJe7zcDPgthogezq8Q0m1"
+    update_password: on_create
+    uid: 1003
+    group: rancid
+    home: /var/lib/rancid
+    create_home: yes
+    shell: /bin/bash
+    groups: rancid
+    append: yes
