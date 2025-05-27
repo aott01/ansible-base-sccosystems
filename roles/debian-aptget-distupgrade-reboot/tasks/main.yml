@@ -1,0 +1,26 @@
+#- name: list packages that will be upgraded
+#  command: /usr/bin/apt list --upgradeable
+#  register: apt_list
+#  ignore_errors: yes
+#
+#- name: display list of packages
+#  debug:
+#    var: apt_list.stdout
+- name: apt-get update distupgrade
+  apt:
+    state: latest
+    update_cache: yes
+    force_apt_get: yes
+    upgrade: dist
+
+- name: apt-get autoremove (remove dependencies that are no longer required)
+  apt:
+    force_apt_get: yes
+    autoremove: yes
+
+- name: apt-get autoclean (remove useless packages from the cache)
+  apt:
+    force_apt_get: yes
+    autoclean: yes
+
+# do not reboot hypervisor from script

@@ -1,0 +1,8 @@
+---
+  - name: Proxmox PVE hypervisors
+    hosts: pve
+    gather_facts: True
+    become: True
+    roles:
+      - debian-aptget-distupgrade-reboot
+#  tasks:
