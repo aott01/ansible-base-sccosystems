@@ -1,11 +1,11 @@
-#- name: list packages that will be upgraded
-#  command: /usr/bin/apt list --upgradeable
-#  register: apt_list
-#  ignore_errors: yes
-#
-#- name: display list of packages
-#  debug:
-#    var: apt_list.stdout
+- name: list packages that will be upgraded
+  command: /usr/bin/apt list --upgradeable
+  register: apt_list
+  ignore_errors: yes
+- name: display list of packages
+  debug:
+    var: apt_list.stdout
+
 - name: apt-get update distupgrade
   apt:
     state: latest
@@ -23,4 +23,5 @@
     force_apt_get: yes
     autoclean: yes
 
-# do not reboot hypervisor from script
+# debian does not readily work with "needsrestart" or "reboot required"
+# of course, do not reboot hypervisor from script
