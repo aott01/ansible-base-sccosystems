@@ -1,0 +1,8 @@
+---
+  - name: util server specific (on Ubuntu 24.04 LTS)
+    hosts: desktop
+    gather_facts: True
+    become: True
+    roles:
+      - ubuntu-aptget-distupgrade-reboot
+#  tasks:
