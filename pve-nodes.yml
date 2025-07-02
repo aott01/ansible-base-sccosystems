@@ -1,0 +1,6 @@
+- name: playbook for Proxmox PVE nodes
+  hosts: pvenodes
+#  tasks:
+  roles:
+#   - pve_firstboot
+    - debian-aptget-distupgrade-reboot

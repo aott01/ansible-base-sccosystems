@@ -1,0 +1,28 @@
+---
+# works witth PVE 8.4
+  - name: comment out enterprise repo
+    lineinfile:
+      path: /etc/apt/sources.list.d/pve-enterprise.list 
+      regexp: '^deb https://enterprise.proxmox.com/debian/pve bookworm pve-enterprise'
+      line: '#deb https://enterprise.proxmox.com/debian/pve bookworm pve-enterprise'
+
+  - name: use no-subscription repo instead of enterprise
+    blockinfile:
+      path: /etc/apt/sources.list
+      block: |
+        # Proxmox VE pve-no-subscription repository provided by proxmox.com
+        deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription
+
+  - name: comment out ceph enterprise
+    lineinfile:
+      path: /etc/apt/sources.list.d/ceph.list 
+      regexp: '^deb https://enterprise.proxmox.com/debian/ceph-quincy bookworm enterprise'
+      line: '#deb https://enterprise.proxmox.com/debian/ceph-quincy bookworm enterprise'
+  - name: use ceph reef
+    blockinfile:
+      path: /etc/apt/sources.list.d/ceph.list 
+      block: |
+        # ceph squid
+        deb http://download.proxmox.com/debian/ceph-squid bookworm no-subscription
+
+# manual reboot suggested
