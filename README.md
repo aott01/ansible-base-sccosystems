@@ -8,3 +8,4 @@ the inventory ./ansible_hosts is not checked in, you need to create it. Define s
 localhost ansible_connection=local
 <remote_IP> ansible_connection=ssh ansible_user=ansible
 ```
+some host_vars/* files are also excluded, they contain secrets
