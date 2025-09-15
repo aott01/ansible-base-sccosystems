@@ -2,6 +2,7 @@
 
 ansible_hosts
 roles/util_apache2/templates/*pem
+host_vars/*pafw1
 
 # any log files
 *.log
