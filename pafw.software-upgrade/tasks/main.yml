@@ -1,0 +1,12 @@
+#
+- name: Download PAN-OS {{ sw_version }} (+ sync to HA peer) + install
+  collections:
+    - paloaltonetworks.panos
+  paloaltonetworks.panos.panos_software:
+    provider: '{{ provider }}'
+    timeout: 1800
+    version: '{{ sw_version }}'
+    sync_to_peer: true
+    perform_software_check: true
+    install: true
+    restart: true
