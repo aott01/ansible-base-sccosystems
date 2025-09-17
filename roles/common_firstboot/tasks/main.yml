@@ -33,6 +33,7 @@
       - zip
       - unzip
       - plocate
+      - python3-venv
 
 - name: remove unwanted and unnecessary packages when running as a VM
   apt:

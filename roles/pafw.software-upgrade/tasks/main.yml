@@ -4,7 +4,7 @@
     - paloaltonetworks.panos
   paloaltonetworks.panos.panos_software:
     provider: '{{ provider }}'
-    timeout: 1800
+    timeout: 3600
     version: '{{ sw_version }}'
     sync_to_peer: true
     perform_software_check: true

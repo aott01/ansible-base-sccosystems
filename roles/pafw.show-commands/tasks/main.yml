@@ -1,10 +1,14 @@
 ---
-  - name: show list of all interfaces
-    paloaltonetworks.panos.panos_op:
-      provider: '{{ provider }}'
-      cmd: 'show interface all'
+#  - name: show list of all interfaces
+#    paloaltonetworks.panos.panos_op:
+#      provider: '{{ provider }}'
+#      cmd: 'show interface all'
 
   - name: show system info
     paloaltonetworks.panos.panos_op:
       provider: '{{ provider }}'
       cmd: 'show system info'
+    register: res
+  - name: Show the system info
+    ansible.builtin.debug:
+      msg: '{{ res.stdout }}'
